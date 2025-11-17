@@ -1,7 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"kaung-htet-hein-dev/kitchen-service-go/cmd"
+)
 
 func main() {
-	fmt.Println("Hello, Kitchen Service!")
+	cmd.Execute()
 }
