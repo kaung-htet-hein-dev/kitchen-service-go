@@ -4,9 +4,16 @@ import (
 	"log"
 	"os"
 
+	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
+
+func init() {
+	if err := godotenv.Load(".env.development"); err != nil {
+		log.Println("Warning: .env.development file not found, using environment variables")
+	}
+}
 
 func ConnectDB() *gorm.DB {
 	dns := GetDNS()

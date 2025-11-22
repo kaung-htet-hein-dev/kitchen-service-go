@@ -25,6 +25,7 @@ func StartServer() {
 
 	router.RegisterOrderRoutes(e, db)
 	router.RegisterFoodRoutes(e, db)
+	router.RegisterTableRoutes(e, db)
 
 	log.Fatal(e.Start(":" + cfg.Port))
 }

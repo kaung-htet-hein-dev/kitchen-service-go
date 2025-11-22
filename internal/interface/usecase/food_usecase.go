@@ -2,14 +2,15 @@ package usecase
 
 import (
 	"kaung-htet-hein-dev/kitchen-service-go/internal/interface/infrastructure/repository"
+	"kaung-htet-hein-dev/kitchen-service-go/internal/interface/request"
 	"kaung-htet-hein-dev/kitchen-service-go/internal/interface/response"
 )
 
 type FoodUsecase struct {
-	foodRepo *repository.FoodHandler
+	foodRepo *repository.FoodRepository
 }
 
-func NewFoodUsecase(foodRepo *repository.FoodHandler) *FoodUsecase {
+func NewFoodUsecase(foodRepo *repository.FoodRepository) *FoodUsecase {
 	return &FoodUsecase{foodRepo: foodRepo}
 }
 
@@ -21,13 +22,18 @@ func (u *FoodUsecase) GetFoods() ([]response.FoodResponse, error) {
 	return foods, nil
 }
 
-func (u *FoodUsecase) CreateFood() {
-	// Business logic to create a food item
-}
-func (u *FoodUsecase) UpdateFood() {
-	// Business logic to update a food item
+func (u *FoodUsecase) GetFood(id string) (*response.FoodResponse, error) {
+	return u.foodRepo.GetFood(id)
 }
 
-func (u *FoodUsecase) DeleteFood() {
-	// Business logic to delete a food item
+func (u *FoodUsecase) CreateFood(req *request.CreateFoodRequest) error {
+	return u.foodRepo.CreateFood(req)
+}
+
+func (u *FoodUsecase) UpdateFood(id string, req *request.CreateFoodRequest) error {
+	return u.foodRepo.UpdateFood(id, req)
+}
+
+func (u *FoodUsecase) DeleteFood(id string) error {
+	return u.foodRepo.DeleteFood(id)
 }
