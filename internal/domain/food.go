@@ -2,8 +2,8 @@ package domain
 
 import "gorm.io/gorm"
 
-type Order struct {
+type Food struct {
 	gorm.Model
-	Status  string
-	TableID uint
+	Name  string
+	Price float64
 }

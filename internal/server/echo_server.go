@@ -2,6 +2,7 @@ package server
 
 import (
 	"kaung-htet-hein-dev/kitchen-service-go/internal/config"
+	"kaung-htet-hein-dev/kitchen-service-go/internal/domain"
 	router "kaung-htet-hein-dev/kitchen-service-go/internal/interface"
 	"kaung-htet-hein-dev/kitchen-service-go/internal/interface/infrastructure/db"
 	"kaung-htet-hein-dev/kitchen-service-go/internal/interface/middleware"
@@ -20,7 +21,10 @@ func StartServer() {
 	middleware.RegisterBasicMiddleware(e)
 	db := db.ConnectDB()
 
+	db.AutoMigrate(&domain.Food{}, &domain.Table{}, &domain.Order{}, &domain.OrderFood{})
+
 	router.RegisterOrderRoutes(e, db)
+	router.RegisterFoodRoutes(e, db)
 
 	log.Fatal(e.Start(":" + cfg.Port))
 }
